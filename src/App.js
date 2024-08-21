@@ -1,25 +1,54 @@
-import logo from './logo.svg';
+import Home from './components/Home';
+import TodoContext from './context/TodoContext';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+  const [todoList, setTodo] = useState([])
+
+  const setTodoList = todo => {
+    setTodo([...todoList, todo])
+  }
+
+  const setTaskStatus = id => {
+    const updatedTodoList = todoList.map(eachTask => {
+        if (eachTask.id === id){
+            return {
+                ...eachTask, taskDone: !eachTask.taskDone
+            }
+        }
+        return eachTask
+    })
+    setTodo(updatedTodoList)
+  }
+
+  const deleteTodoFunc = id => {
+    setTodo(todoList.filter(eachTodo => eachTodo.id !== id))
+  }
+
+  const editTodoItemFunc = (todo, id) => {
+    const updatedTodoList = todoList.map(eachTask => {
+      if (eachTask.id === id){
+          return todo
+      }
+      return eachTask
+  })
+  setTodo(updatedTodoList)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <TodoContext.Provider value={
+        {
+          todoList, 
+          setTodoList: setTodoList, 
+          setTaskStatus: setTaskStatus,
+          deleteTodoFunc: deleteTodoFunc,
+          editTodoItemFunc: editTodoItemFunc
+        }}
+      >
+      <Home/>
+    </TodoContext.Provider>
+  )
 }
 
 export default App;
