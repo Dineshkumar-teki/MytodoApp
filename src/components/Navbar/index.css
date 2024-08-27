@@ -12,11 +12,17 @@
         outline: none;
         border: none;
         align-self: center;
-        background-color: white;
+        background-color: transparent;
         font-size: 1.2rem;
         object-fit: cover;
         display: flex;
+        border-radius: 50%;
+        padding: 3px;
+        transition: 1s;
         align-items: center;
+    }
+    nav button:hover{
+        background-color: rgb(218, 215, 215);
     }
 }
 @media (min-width: 426px){
@@ -37,5 +43,13 @@
         font-size: 1.5rem;
         display: flex;
         align-items: center;
+        background-color: transparent;
+        padding: 5px;
+        transition: 1s;
+        border-radius: 50%;
+        color: black;
+    }
+    nav button:hover{
+        background-color: rgb(218, 215, 215);
     }
 }

@@ -54,8 +54,8 @@
         
     }
     .emptyTodoList > img{
-        width: 45%;
         object-fit: cover;
+        width: 40%;
     }
 }
 @media (max-width: 425px){
